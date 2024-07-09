@@ -1,0 +1,57 @@
+networks:
+  api:
+    external: true
+    name: amorela
+
+services:
+  npm:
+    image: amorelanode20:latest
+    tty: true
+    environment:
+        NODE_ENV: development
+    volumes:
+        - ./:/var/www/front
+    working_dir: /var/www/front
+    entrypoint: [ 'npm' ]
+    networks:
+        - api
+
+  amorela-front:
+    image: amorelanode20:latest
+    container_name: frontend
+    ports:
+        - "4200:4200"
+    tty: true
+    environment:
+        NODE_ENV: development
+    volumes:
+        - ./:/var/www/front
+    working_dir: /var/www/front
+    command: node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve --host 0.0.0.0
+    networks:
+        - api
+
+  ng:
+    image: amorelanode20:latest
+    tty: true
+    environment:
+        NODE_ENV: development
+    volumes:
+        - ./:/var/www/front
+    working_dir: /var/www/front
+    entrypoint: ['ng']
+    networks:
+        - api
+
+  #amorela-front:
+   # build:
+    #  context: .
+     # dockerfile: Dockerfile
+    #ports:
+     # - "4200:4200"
+    #volumes:
+     # - .:/app
+    #environment:
+     # - CHOKIDAR_USEPOLLING=true
+    #restart: always
+

@@ -1,0 +1,48 @@
+<div class="main">
+  <mat-card class="example-card" appearance="raised">
+    <mat-card-header aling="center" color="accent">
+      <div class="container">
+        <div class="div-logo">
+          <img src="/assets/images/logo_amorela.png" alt="logo" width="100%">
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content color="accent">
+      <form [formGroup]="loginForm" class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex. nome@example.com">
+          @if (loginForm.hasError('email') && !loginForm.hasError('required')) {
+          <mat-error>Digite um e-mail válido</mat-error>
+          }
+          @if (loginForm.hasError('required')) {
+          <mat-error>Email é <strong>obrigatório</strong></mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Senha</mat-label>
+          <input type="password" matInput formControlName="password">
+          @if (loginForm.hasError('password') && !loginForm.hasError('required')) {
+          <mat-error>Digite sua senha</mat-error>
+          }
+          @if (loginForm.hasError('required')) {
+          <mat-error>Senha é <strong>obrigatória!</strong></mat-error>
+          }
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      @if (!loading) {
+      <div class="container">
+        <button color="primary" mat-flat-button [disabled]="loginForm.invalid" (click)="login()">
+          Acessar
+        </button>
+      </div>
+      }@else {
+        <div class="container">
+          <app-loading [tamanho]="30" [mensagem]="'Aguarde...'"></app-loading>
+        </div>
+      }
+    </mat-card-actions>
+  </mat-card>
+</div>

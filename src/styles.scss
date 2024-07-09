@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+$my-theme: mat.define-theme((
+ color: (
+    theme-type: light,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$green-palette
+  ),
+));
+
+html {
+  @include mat.all-component-themes($my-theme);
+}
+
+/* "@angular/material/prebuilt-themes/purple-green.css", */
