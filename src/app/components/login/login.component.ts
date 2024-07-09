@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
-      email: ['renan.celso@gmail.com', [Validators.required, Validators.email]],
-      password: ['kiko339133', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
     });
   }
 
